@@ -15,10 +15,18 @@
  */
 package org.spotter.benchmark.app;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import org.spotter.benchmark.app.problems.OLBProblem;
+import org.spotter.benchmark.app.problems.Problem;
+import org.spotter.benchmark.app.problems.RampProblem;
 
 /**
  * Dummy Application.
@@ -29,16 +37,15 @@ import javax.ws.rs.core.MediaType;
 @Path("benchmark")
 public class DummyApp {
 
-	/**
-	 * 
-	 * @return hello string
-	 */
-	@GET
-	@Path("testRamp")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String testRamp() {
-		System.out.println("testRamp called");
-		return "Hello from Ramp Test Method!";
+	private final Map<String, Problem> problems = new HashMap<>();
+
+	public DummyApp() {
+		populateProblems();
+	}
+
+	private void populateProblems() {
+		problems.put(RampProblem.NAME, RampProblem.getInstance());
+		problems.put(OLBProblem.NAME, OLBProblem.getInstance());
 	}
 
 	/**
@@ -46,23 +53,15 @@ public class DummyApp {
 	 * @return hello string
 	 */
 	@GET
-	@Path("testOLB")
+	@Path("testProblem" + "/{problemName}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String testOLB() {
-		System.out.println("testOLB called");
-		return "Hello from OLB Test Method!";
-	}
-
-	/**
-	 * 
-	 * @return hello string
-	 */
-	@GET
-	@Path("testHiccups")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String testHiccups() {
-		System.out.println("testHiccups called");
-		return "Hello from Hiccup Test Method!";
+	public String testProblem(@PathParam("problemName") String problemName) {
+		if (problems.containsKey(problemName)) {
+			problems.get(problemName).test();
+			return "Hello from " + problemName + " Test Method!";
+		} else {
+			return "Problem does not exist!";
+		}
 	}
 
 }

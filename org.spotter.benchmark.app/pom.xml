@@ -34,6 +34,11 @@
 			<version>1.17.1</version>
 		</dependency>
 		<dependency>
+			<groupId>org.spotter</groupId>
+			<artifactId>org.spotter.core</artifactId>
+			<version>${spotter.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.spotter.ext</groupId>
 			<artifactId>org.spotter.ext.workload</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

@@ -29,12 +29,11 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public final class BenchmarkAppLauncher {
-	private static final int NUM_WORKER_THREADS = 200;
+	
+	public static final int DEFAULT_PORT = 8081;
+	
+	private static final int NUM_WORKER_THREADS = 2;
 	private static final Logger LOGGER = LoggerFactory.getLogger(BenchmarkAppLauncher.class);
-	private static final int DEFAULT_PORT = 8081;
-	private static final String PORT_KEY = "port=";
-
-	private static Integer port = DEFAULT_PORT;
 
 	/**
 	 * Private constructor due to singleton class.
@@ -54,7 +53,6 @@ public final class BenchmarkAppLauncher {
 	public static void main(String[] args) {
 
 		if (args != null) {
-			parseArgs(args);
 
 			if (args.length < 1) {
 				printHelpAndExit();
@@ -63,9 +61,9 @@ public final class BenchmarkAppLauncher {
 					List<String> servicePackages = new ArrayList<>();
 					servicePackages.add("org.spotter.benchmark.app");
 					WebServer.getInstance()
-							.start(port, "", servicePackages, NUM_WORKER_THREADS / 2, NUM_WORKER_THREADS);
+							.start(DEFAULT_PORT, "", servicePackages, NUM_WORKER_THREADS / 2, NUM_WORKER_THREADS);
 				} else if (args[0].equalsIgnoreCase("shutdown")) {
-					WebServer.triggerServerShutdown(port, "");
+					WebServer.triggerServerShutdown(DEFAULT_PORT, "");
 				} else {
 					LOGGER.error("Invalid value for 1st argument! Valid values are: start / shutdown");
 				}
@@ -80,27 +78,8 @@ public final class BenchmarkAppLauncher {
 
 	private static void printHelpAndExit() {
 		LOGGER.info("Benchmark App Launcher requires at least one argument:");
-		LOGGER.info("Usage: java -jar <BENCHMARK_JAR> {start | shutdown} [options]");
-		LOGGER.info("the options are:");
-		LOGGER.info(PORT_KEY + "=<PORT>: port to bind the server to, default: 8081");
+		LOGGER.info("Usage: java -jar <BENCHMARK_JAR> {start | shutdown}");
 		System.exit(0);
-	}
-
-	/**
-	 * Parses the agent arguments.
-	 * 
-	 * @param agentArgs
-	 *            arguments as string
-	 */
-	private static void parseArgs(String[] agentArgs) {
-		if (agentArgs == null) {
-			return;
-		}
-		for (String arg : agentArgs) {
-			if (arg.startsWith(PORT_KEY)) {
-				port = Integer.parseInt(arg.substring(PORT_KEY.length()));
-			}
-		}
 	}
 
 }

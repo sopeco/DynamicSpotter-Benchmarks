@@ -9,6 +9,7 @@
 
 	<properties>
 		<lpe.common.version>1.0.4-SNAPSHOT</lpe.common.version>
+		<spotter.version>1.0.1-SNAPSHOT</spotter.version>
 		<spotter.ext.version>0.0.1-SNAPSHOT</spotter.ext.version>
 	</properties>
 
@@ -24,38 +25,5 @@
 	<modules>
 		<module>../org.spotter.benchmark.app</module>
 	</modules>
-	
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.lpe.common</groupId>
-			<artifactId>org.lpe.common.utils</artifactId>
-			<version>${lpe.common.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.lpe.common</groupId>
-			<artifactId>org.lpe.common.config</artifactId>
-			<version>${lpe.common.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.lpe.common</groupId>
-			<artifactId>org.lpe.common.extension</artifactId>
-			<version>${lpe.common.version}</version>
-		</dependency>
-
-	</dependencies>
 
 </project>
