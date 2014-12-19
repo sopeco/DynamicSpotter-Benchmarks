@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.spotter.benchmark</groupId>
+	<artifactId>org.spotter.benchmark.parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>DynamicSpotter Benchmark Parent</name>
+
+	<properties>
+		<lpe.common.version>1.0.4-SNAPSHOT</lpe.common.version>
+		<spotter.version>1.0.1-SNAPSHOT</spotter.version>
+		<spotter.ext.version>0.0.1-SNAPSHOT</spotter.ext.version>
+	</properties>
+
+
+	<repositories>
+		<repository>
+			<id>lpe-repos</id>
+			<name>LPE Repository</name>
+			<url>http://i43vm-saas.ipd.uka.de:8081/artifactory/lpe-repos</url>
+		</repository>
+	</repositories>
+
+	<modules>
+		<module>../org.spotter.benchmark.app</module>
+	</modules>
+
+</project>
