@@ -39,6 +39,9 @@ public class DummyApp {
 
 	private final Map<String, Problem> problems = new HashMap<>();
 
+	/**
+	 * Constructor.
+	 */
 	public DummyApp() {
 		populateProblems();
 	}
@@ -49,7 +52,10 @@ public class DummyApp {
 	}
 
 	/**
+	 * Tests the given problem.
 	 * 
+	 * @param problemName
+	 *            the name of the problem to test
 	 * @return hello string
 	 */
 	@GET

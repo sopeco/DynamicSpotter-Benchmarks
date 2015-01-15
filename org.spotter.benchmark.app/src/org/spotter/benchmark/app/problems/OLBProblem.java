@@ -1,12 +1,22 @@
 package org.spotter.benchmark.app.problems;
 
-public class OLBProblem implements Problem {
+/**
+ * The OLB problem which is using a synchronized call to a fibonacci
+ * calculation.
+ * 
+ * @author Denis Knoepfle
+ * 
+ */
+public final class OLBProblem implements Problem {
 
 	public static final String NAME = "olb";
 
 	private static final int FIB_NUMBER = 25;
 	private static OLBProblem instance;
 
+	/**
+	 * @return the singleton instance
+	 */
 	public static synchronized OLBProblem getInstance() {
 		if (instance == null) {
 			instance = new OLBProblem();
@@ -22,6 +32,9 @@ public class OLBProblem implements Problem {
 		syncFibonacci();
 	}
 
+	/**
+	 * Calculates a fibonacci number.
+	 */
 	public synchronized void syncFibonacci() {
 		fibonacci(FIB_NUMBER);
 	}
