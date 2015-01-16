@@ -32,7 +32,9 @@ public final class BenchmarkAppLauncher {
 
 	public static final int DEFAULT_PORT = 8081;
 
-	private static final int NUM_WORKER_THREADS = 2;
+	private static final int MIN_NUM_WORKER_THREADS = 10;
+	private static final int MAX_NUM_WORKER_THREADS = 500;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(BenchmarkAppLauncher.class);
 
 	/**
@@ -60,8 +62,9 @@ public final class BenchmarkAppLauncher {
 				if (args[0].equalsIgnoreCase("start")) {
 					List<String> servicePackages = new ArrayList<>();
 					servicePackages.add("org.spotter.benchmark.app");
-					WebServer.getInstance().start(DEFAULT_PORT, "", servicePackages, NUM_WORKER_THREADS / 2,
-							NUM_WORKER_THREADS);
+					WebServer.getInstance().start(DEFAULT_PORT, "", servicePackages, MIN_NUM_WORKER_THREADS,
+							MAX_NUM_WORKER_THREADS);
+
 				} else if (args[0].equalsIgnoreCase("shutdown")) {
 					WebServer.triggerServerShutdown(DEFAULT_PORT, "");
 				} else {
