@@ -24,6 +24,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.spotter.benchmark.app.problems.ClearHiccupProblem;
+import org.spotter.benchmark.app.problems.NoProblemWithOutliers;
+import org.spotter.benchmark.app.problems.NoProblemWithoutOutliers;
 import org.spotter.benchmark.app.problems.OLBProblem;
 import org.spotter.benchmark.app.problems.Problem;
 import org.spotter.benchmark.app.problems.RampProblem;
@@ -37,6 +42,8 @@ import org.spotter.benchmark.app.problems.RampProblem;
 @Path("benchmark")
 public class DummyApp {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(DummyApp.class);
+
 	private final Map<String, Problem> problems = new HashMap<>();
 
 	/**
@@ -49,6 +56,9 @@ public class DummyApp {
 	private void populateProblems() {
 		problems.put(RampProblem.NAME, RampProblem.getInstance());
 		problems.put(OLBProblem.NAME, OLBProblem.getInstance());
+		problems.put(NoProblemWithoutOutliers.NAME, NoProblemWithoutOutliers.getInstance());
+		problems.put(NoProblemWithOutliers.NAME, NoProblemWithOutliers.getInstance());
+		problems.put(ClearHiccupProblem.NAME, ClearHiccupProblem.getInstance());
 	}
 
 	/**
@@ -62,12 +72,15 @@ public class DummyApp {
 	@Path("testProblem" + "/{problemName}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String testProblem(@PathParam("problemName") String problemName) {
+		String response;
 		if (problems.containsKey(problemName)) {
 			problems.get(problemName).test();
-			return "Hello from " + problemName + " Test Method!";
+			response = "Hello from " + problemName + " Test Method!";
 		} else {
-			return "Problem does not exist!";
+			response = "Problem does not exist!";
+			LOGGER.debug(response);
 		}
+		return response;
 	}
 
 }
