@@ -32,6 +32,7 @@ import org.spotter.benchmark.app.problems.NoProblemWithoutOutliers;
 import org.spotter.benchmark.app.problems.OLBProblem;
 import org.spotter.benchmark.app.problems.Problem;
 import org.spotter.benchmark.app.problems.RampProblem;
+import org.spotter.benchmark.app.problems.TrafficJamCPUIntensiveProblem;
 
 /**
  * Dummy Application.
@@ -59,6 +60,7 @@ public class DummyApp {
 		problems.put(NoProblemWithoutOutliers.NAME, NoProblemWithoutOutliers.getInstance());
 		problems.put(NoProblemWithOutliers.NAME, NoProblemWithOutliers.getInstance());
 		problems.put(ClearHiccupProblem.NAME, ClearHiccupProblem.getInstance());
+		problems.put(TrafficJamCPUIntensiveProblem.NAME, TrafficJamCPUIntensiveProblem.getInstance());
 	}
 
 	/**
