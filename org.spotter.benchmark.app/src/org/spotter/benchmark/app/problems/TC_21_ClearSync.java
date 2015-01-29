@@ -7,24 +7,23 @@ package org.spotter.benchmark.app.problems;
  * @author Denis Knoepfle
  * 
  */
-public final class OLBProblem implements Problem {
+public final class TC_21_ClearSync extends Problem {
 
-	public static final String NAME = "olb";
-
+	
 	private static final int FIB_NUMBER = 35;
-	private static OLBProblem instance;
+	private static TC_21_ClearSync instance;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized OLBProblem getInstance() {
+	public static synchronized TC_21_ClearSync getInstance() {
 		if (instance == null) {
-			instance = new OLBProblem();
+			instance = new TC_21_ClearSync();
 		}
 		return instance;
 	}
 
-	private OLBProblem() {
+	private TC_21_ClearSync() {
 	}
 
 	@Override

@@ -9,8 +9,7 @@ import java.util.UUID;
 
 import org.spotter.benchmark.dummyjdbc.server.rest.DummyDB;
 
-public class TC_11_ManyDiffDBCalls implements Problem {
-	public static final String NAME = TC_11_ManyDiffDBCalls.class.getSimpleName();
+public class TC_11_ManyDiffDBCalls extends Problem {
 	public static Random rand = new Random(System.nanoTime());
 	public static Connection connection;
 	static {

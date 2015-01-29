@@ -2,11 +2,11 @@ package org.spotter.benchmark.app.loadscripts;
 
 import org.spotter.benchmark.app.problems.TC_11_ManyDiffDBCalls;
 
-public class TC_11_ManyDiffDBCallsVUser extends AbstractVUser {
+public class VU_11_ManyDiffDBCalls extends AbstractVUser {
 
 	@Override
 	public void executeIteration() {
-		doExecuteIteration(TC_11_ManyDiffDBCalls.NAME);
+		doExecuteIteration(TC_11_ManyDiffDBCalls.class.getSimpleName());
 	}
 
 }

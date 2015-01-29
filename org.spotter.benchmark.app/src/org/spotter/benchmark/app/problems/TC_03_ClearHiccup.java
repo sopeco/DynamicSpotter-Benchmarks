@@ -6,23 +6,22 @@ package org.spotter.benchmark.app.problems;
  * @author Denis Knoepfle
  * 
  */
-public final class ClearHiccupProblem implements Problem {
+public final class TC_03_ClearHiccup extends Problem {
 
-	public static final String NAME = "clear hiccup";
 
-	private static ClearHiccupProblem instance;
+	private static TC_03_ClearHiccup instance;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized ClearHiccupProblem getInstance() {
+	public static synchronized TC_03_ClearHiccup getInstance() {
 		if (instance == null) {
-			instance = new ClearHiccupProblem();
+			instance = new TC_03_ClearHiccup();
 		}
 		return instance;
 	}
 
-	private ClearHiccupProblem() {
+	private TC_03_ClearHiccup() {
 	}
 
 	@Override

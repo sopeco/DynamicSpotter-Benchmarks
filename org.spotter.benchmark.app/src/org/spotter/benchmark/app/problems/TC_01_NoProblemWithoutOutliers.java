@@ -8,28 +8,27 @@ import org.spotter.shared.configuration.ConfigKeys;
  * @author Denis Knoepfle
  * 
  */
-public final class NoProblemWithoutOutliers implements Problem {
+public final class TC_01_NoProblemWithoutOutliers extends Problem {
 
-	public static final String NAME = "no problem without outliers";
-
+	
 	private static final int PERFORMANCE_REQU_THRESHOLD = ConfigKeys.DEFAULT_PERFORMANCE_REQUIREMENT_THRESHOLD;
 	private static final double SLEEP_TIME_PERCENTAGE = 0.5;
 
-	private static NoProblemWithoutOutliers instance;
+	private static TC_01_NoProblemWithoutOutliers instance;
 
 	private final int sleepTime;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized NoProblemWithoutOutliers getInstance() {
+	public static synchronized TC_01_NoProblemWithoutOutliers getInstance() {
 		if (instance == null) {
-			instance = new NoProblemWithoutOutliers();
+			instance = new TC_01_NoProblemWithoutOutliers();
 		}
 		return instance;
 	}
 
-	private NoProblemWithoutOutliers() {
+	private TC_01_NoProblemWithoutOutliers() {
 		this.sleepTime = (int) (SLEEP_TIME_PERCENTAGE * PERFORMANCE_REQU_THRESHOLD);
 	}
 

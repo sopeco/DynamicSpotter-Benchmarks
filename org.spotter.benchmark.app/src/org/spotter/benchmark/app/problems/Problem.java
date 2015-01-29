@@ -6,10 +6,14 @@ package org.spotter.benchmark.app.problems;
  * @author Denis Knoepfle
  * 
  */
-public interface Problem {
+public abstract class Problem {
 
 	/**
 	 * Tests this problem.
 	 */
-	void test();
+	abstract public void test();
+	
+	public String getName(){
+		return this.getClass().getSimpleName();
+	}
 }

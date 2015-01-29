@@ -26,14 +26,14 @@ import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spotter.benchmark.app.problems.ClearHiccupProblem;
-import org.spotter.benchmark.app.problems.NoProblemWithOutliers;
-import org.spotter.benchmark.app.problems.NoProblemWithoutOutliers;
-import org.spotter.benchmark.app.problems.OLBProblem;
+import org.spotter.benchmark.app.problems.TC_03_ClearHiccup;
+import org.spotter.benchmark.app.problems.TC_02_NoProblemWithOutliers;
+import org.spotter.benchmark.app.problems.TC_01_NoProblemWithoutOutliers;
+import org.spotter.benchmark.app.problems.TC_21_ClearSync;
 import org.spotter.benchmark.app.problems.Problem;
-import org.spotter.benchmark.app.problems.RampProblem;
+import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
 import org.spotter.benchmark.app.problems.TC_11_ManyDiffDBCalls;
-import org.spotter.benchmark.app.problems.TrafficJamCPUIntensiveProblem;
+import org.spotter.benchmark.app.problems.TC_10_CPUIntensiveApp;
 
 /**
  * Dummy Application.
@@ -56,13 +56,13 @@ public class DummyApp {
 	}
 
 	private void populateProblems() {
-		problems.put(RampProblem.NAME, RampProblem.getInstance());
-		problems.put(OLBProblem.NAME, OLBProblem.getInstance());
-		problems.put(NoProblemWithoutOutliers.NAME, NoProblemWithoutOutliers.getInstance());
-		problems.put(NoProblemWithOutliers.NAME, NoProblemWithOutliers.getInstance());
-		problems.put(ClearHiccupProblem.NAME, ClearHiccupProblem.getInstance());
-		problems.put(TrafficJamCPUIntensiveProblem.NAME, TrafficJamCPUIntensiveProblem.getInstance());
-		problems.put(TC_11_ManyDiffDBCalls.NAME, TC_11_ManyDiffDBCalls.getInstance());
+		problems.put(TC_07_BlurredRamp.class.getSimpleName(), TC_07_BlurredRamp.getInstance());
+		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
+		problems.put(TC_01_NoProblemWithoutOutliers.class.getSimpleName(), TC_01_NoProblemWithoutOutliers.getInstance());
+		problems.put(TC_02_NoProblemWithOutliers.class.getSimpleName(), TC_02_NoProblemWithOutliers.getInstance());
+		problems.put(TC_03_ClearHiccup.class.getSimpleName(), TC_03_ClearHiccup.getInstance());
+		problems.put(TC_10_CPUIntensiveApp.class.getSimpleName(), TC_10_CPUIntensiveApp.getInstance());
+		problems.put(TC_11_ManyDiffDBCalls.class.getSimpleName(), TC_11_ManyDiffDBCalls.getInstance());
 	}
 
 	/**

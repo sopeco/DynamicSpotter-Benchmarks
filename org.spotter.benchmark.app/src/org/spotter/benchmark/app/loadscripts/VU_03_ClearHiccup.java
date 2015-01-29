@@ -1,6 +1,6 @@
 package org.spotter.benchmark.app.loadscripts;
 
-import org.spotter.benchmark.app.problems.ClearHiccupProblem;
+import org.spotter.benchmark.app.problems.TC_03_ClearHiccup;
 
 /**
  * A loadscript for the clear hiccups problem.
@@ -8,11 +8,11 @@ import org.spotter.benchmark.app.problems.ClearHiccupProblem;
  * @author Denis Knoepfle
  * 
  */
-public class ClearHiccupVUser extends AbstractVUser {
+public class VU_03_ClearHiccup extends AbstractVUser {
 
 	@Override
 	public void executeIteration() {
-		doExecuteIteration(ClearHiccupProblem.NAME);
+		doExecuteIteration(TC_03_ClearHiccup.class.getSimpleName());
 	}
 
 }

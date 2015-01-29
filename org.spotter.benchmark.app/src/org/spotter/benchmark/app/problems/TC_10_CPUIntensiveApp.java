@@ -1,22 +1,21 @@
 package org.spotter.benchmark.app.problems;
 
-public class TrafficJamCPUIntensiveProblem implements Problem {
-	public static final String NAME = "TrafficJamCPUintensiveProblem";
-
+public class TC_10_CPUIntensiveApp extends Problem {
+	
 	private static final int FIB_NUMBER = 35;
-	private static TrafficJamCPUIntensiveProblem instance;
+	private static TC_10_CPUIntensiveApp instance;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized TrafficJamCPUIntensiveProblem getInstance() {
+	public static synchronized TC_10_CPUIntensiveApp getInstance() {
 		if (instance == null) {
-			instance = new TrafficJamCPUIntensiveProblem();
+			instance = new TC_10_CPUIntensiveApp();
 		}
 		return instance;
 	}
 
-	private TrafficJamCPUIntensiveProblem() {
+	private TC_10_CPUIntensiveApp() {
 	}
 
 	@Override

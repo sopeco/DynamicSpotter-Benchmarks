@@ -8,10 +8,9 @@ import java.util.Random;
  * @author Denis Knoepfle
  * 
  */
-public final class RampProblem implements Problem {
+public final class TC_07_BlurredRamp extends Problem {
 
-	public static final String NAME = "ramp";
-
+	
 	private static final long START_SLEEP = 80;
 	private static final double SLEEP_DEVIATION = 0.5;
 	private static final long SLEEP_TIME_INCREASE = 6;
@@ -20,19 +19,19 @@ public final class RampProblem implements Problem {
 	private static final Random RAND = new Random(System.nanoTime());
 
 	private volatile long sleepTime;
-	private static RampProblem instance;
+	private static TC_07_BlurredRamp instance;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized RampProblem getInstance() {
+	public static synchronized TC_07_BlurredRamp getInstance() {
 		if (instance == null) {
-			instance = new RampProblem();
+			instance = new TC_07_BlurredRamp();
 		}
 		return instance;
 	}
 
-	private RampProblem() {
+	private TC_07_BlurredRamp() {
 		this.sleepTime = START_SLEEP;
 	}
 
