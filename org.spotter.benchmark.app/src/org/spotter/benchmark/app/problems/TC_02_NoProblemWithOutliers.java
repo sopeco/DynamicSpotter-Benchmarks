@@ -14,13 +14,12 @@ import org.spotter.shared.configuration.ConfigKeys;
  */
 public final class TC_02_NoProblemWithOutliers extends Problem {
 
-	
 	private static final Random RANDOM = new Random(System.currentTimeMillis());
 	private static final Logger LOGGER = LoggerFactory.getLogger(TC_02_NoProblemWithOutliers.class);
 	private static final double _HUNDRED = 100.0;
 
 	private static final int PERFORMANCE_REQU_THRESHOLD = ConfigKeys.DEFAULT_PERFORMANCE_REQUIREMENT_THRESHOLD;
-	private static final double OUTLIER_PERCENTAGE = 0.006;
+	private static final double OUTLIER_PERCENTAGE = 0.0075;
 	private static final double SLEEP_TIME_PERCENTAGE = 0.5;
 	private static final double MIN_EXCEEDING_PERCENTAGE = 0.01;
 	private static final double MAX_EXCEEDING_PERCENTAGE = 0.5;

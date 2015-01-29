@@ -5,16 +5,17 @@ import java.util.Random;
 import org.lpe.common.util.system.LpeSystemUtils;
 
 /**
- * The hiccup problem with clearly defined hiccups.
+ * The hiccup problem with random outliers within the hiccup phases.
  * 
  * @author Denis Knoepfle
  * 
  */
-public final class TC_03_ClearHiccup extends Problem {
+public final class TC_05_BlurredHiccup extends Problem {
 
 	private static final long NORMAL_SLEEP_TIME = 80; // [ms]
 	private static final long HICCUP_PHASE_SLEEP_TIME = 1800; // [ms]
 	private static final double SLEEP_DEVIATION = 0.4;
+	private static final double HICCUP_OUTLIER_PERCENTAGE = 0.15;
 
 	private static final long HICCUP_DURATION = 2500; // [ms]
 	private static final long MIN_TO_NEXT_HICCUP = 4000; // [ms]
@@ -26,19 +27,19 @@ public final class TC_03_ClearHiccup extends Problem {
 
 	private volatile boolean isHiccupPhase;
 	private volatile boolean canHiccup;
-	private static TC_03_ClearHiccup instance;
+	private static TC_05_BlurredHiccup instance;
 
 	/**
 	 * @return the singleton instance
 	 */
-	public static synchronized TC_03_ClearHiccup getInstance() {
+	public static synchronized TC_05_BlurredHiccup getInstance() {
 		if (instance == null) {
-			instance = new TC_03_ClearHiccup();
+			instance = new TC_05_BlurredHiccup();
 		}
 		return instance;
 	}
 
-	private TC_03_ClearHiccup() {
+	private TC_05_BlurredHiccup() {
 		this.isHiccupPhase = false;
 		this.canHiccup = true;
 	}
@@ -61,8 +62,16 @@ public final class TC_03_ClearHiccup extends Problem {
 	 * @return the next sleep time
 	 */
 	private long getSleepTime() {
-		long baseSleepTime = isHiccupPhase ? HICCUP_PHASE_SLEEP_TIME : NORMAL_SLEEP_TIME;
-		return baseSleepTime + (long) (((2.0 * (nextDouble() - HALF)) * SLEEP_DEVIATION) * (double) baseSleepTime);
+		boolean inHiccup = isHiccupPhase;
+		boolean isOutlier = inHiccup && nextDouble() < HICCUP_OUTLIER_PERCENTAGE;
+		long baseSleepTime = inHiccup ? HICCUP_PHASE_SLEEP_TIME : NORMAL_SLEEP_TIME;
+		long sleepTime = baseSleepTime
+				+ (long) (((2.0 * (nextDouble() - HALF)) * SLEEP_DEVIATION) * (double) baseSleepTime);
+		if (isOutlier) {
+			sleepTime -= (long) ((HALF + nextDouble() * SLEEP_DEVIATION) * sleepTime);
+			System.out.println("Generated hiccup outlier with a sleeptime of " + sleepTime);
+		}
+		return sleepTime;
 	}
 
 	private long calcHiccupDuration() {
@@ -101,7 +110,7 @@ public final class TC_03_ClearHiccup extends Problem {
 	}
 
 	private synchronized void endHiccup() {
-		isHiccupPhase = false;
+		this.isHiccupPhase = false;
 	}
 
 	private synchronized double nextDouble() {

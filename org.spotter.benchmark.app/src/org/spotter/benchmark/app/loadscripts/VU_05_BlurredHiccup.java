@@ -15,19 +15,19 @@
  */
 package org.spotter.benchmark.app.loadscripts;
 
-import org.spotter.benchmark.app.problems.TC_21_ClearSync;
+import org.spotter.benchmark.app.problems.TC_05_BlurredHiccup;
 
 /**
- * A loadscript for the clear sync problem.
+ * A loadscript for the blurred hiccups problem.
  * 
  * @author Denis Knoepfle
  * 
  */
-public class VU_21_ClearSync extends AbstractVUser {
+public class VU_05_BlurredHiccup extends AbstractVUser {
 
 	@Override
 	public void executeIteration() {
-		doExecuteIteration(TC_21_ClearSync.class.getSimpleName());
+		doExecuteIteration(TC_05_BlurredHiccup.class.getSimpleName());
 	}
 
 }
