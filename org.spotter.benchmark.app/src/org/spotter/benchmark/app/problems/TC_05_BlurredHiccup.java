@@ -5,7 +5,7 @@ import java.util.Random;
 import org.lpe.common.util.system.LpeSystemUtils;
 
 /**
- * The hiccup problem caused by random and excessive garbage collection.
+ * The hiccup problem with random outliers within the hiccup phases.
  * 
  * @author Denis Knoepfle
  * 

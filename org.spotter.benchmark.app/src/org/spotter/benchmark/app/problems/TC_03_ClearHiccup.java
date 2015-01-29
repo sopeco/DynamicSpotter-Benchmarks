@@ -14,10 +14,10 @@ public final class TC_03_ClearHiccup extends Problem {
 
 	private static final long NORMAL_SLEEP_TIME = 80; // [ms]
 	private static final long HICCUP_PHASE_SLEEP_TIME = 1800; // [ms]
-	private static final double SLEEP_DEVIATION = 0.25;
+	private static final double SLEEP_DEVIATION = 0.4;
 
-	private static final long HICCUP_DURATION = 3000; // [ms]
-	private static final long MIN_TO_NEXT_HICCUP = 2500; // [ms]
+	private static final long HICCUP_DURATION = 2500; // [ms]
+	private static final long MIN_TO_NEXT_HICCUP = 4000; // [ms]
 	private static final double HICCUP_DURATION_DEVIATION = 0.5;
 	private static final double HICCUP_BEGIN_PROB = 0.002;
 
