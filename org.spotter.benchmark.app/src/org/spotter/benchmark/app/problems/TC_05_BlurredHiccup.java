@@ -10,23 +10,23 @@ import org.lpe.common.util.system.LpeSystemUtils;
  * @author Denis Knoepfle
  * 
  */
-public final class TC_05_BlurredHiccup implements Problem {
-
-	public static final String NAME = "Blurred Hiccups";
+public final class TC_05_BlurredHiccup extends Problem {
 
 	private static final long NORMAL_SLEEP_TIME = 80; // [ms]
 	private static final long HICCUP_PHASE_SLEEP_TIME = 1800; // [ms]
 	private static final double SLEEP_DEVIATION = 0.4;
+	private static final double HICCUP_OUTLIER_PERCENTAGE = 0.15;
 
-	private static final long HICCUP_DURATION = 8000; // [ms]
-	private static final double HICCUP_DURATION_DEVIATION = 0.4;
-	private static final double HICCUP_BEGIN_PROB = 0.001;
+	private static final long HICCUP_DURATION = 2500; // [ms]
+	private static final long MIN_TO_NEXT_HICCUP = 4000; // [ms]
+	private static final double HICCUP_DURATION_DEVIATION = 0.5;
+	private static final double HICCUP_BEGIN_PROB = 0.002;
 
 	private static final Random RAND = new Random(System.nanoTime());
 	private static final double HALF = 0.5;
 
 	private volatile boolean isHiccupPhase;
-
+	private volatile boolean canHiccup;
 	private static TC_05_BlurredHiccup instance;
 
 	/**
@@ -41,6 +41,7 @@ public final class TC_05_BlurredHiccup implements Problem {
 
 	private TC_05_BlurredHiccup() {
 		this.isHiccupPhase = false;
+		this.canHiccup = true;
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public final class TC_05_BlurredHiccup implements Problem {
 			long sleepTime = getSleepTime();
 			Thread.sleep(sleepTime);
 			System.out.println("Slept for " + sleepTime + " ms");
-			if (!isHiccupPhase && nextDouble() < HICCUP_BEGIN_PROB) {
+			if (!isHiccupPhase && canHiccup && nextDouble() < HICCUP_BEGIN_PROB) {
 				beginHiccup();
 			}
 		} catch (InterruptedException e) {
@@ -60,9 +61,17 @@ public final class TC_05_BlurredHiccup implements Problem {
 	/**
 	 * @return the next sleep time
 	 */
-	protected long getSleepTime() {
-		long baseSleepTime = isHiccupPhase ? HICCUP_PHASE_SLEEP_TIME : NORMAL_SLEEP_TIME;
-		return baseSleepTime + (long) (((2.0 * (nextDouble() - HALF)) * SLEEP_DEVIATION) * (double) baseSleepTime);
+	private long getSleepTime() {
+		boolean inHiccup = isHiccupPhase;
+		boolean isOutlier = inHiccup && nextDouble() < HICCUP_OUTLIER_PERCENTAGE;
+		long baseSleepTime = inHiccup ? HICCUP_PHASE_SLEEP_TIME : NORMAL_SLEEP_TIME;
+		long sleepTime = baseSleepTime
+				+ (long) (((2.0 * (nextDouble() - HALF)) * SLEEP_DEVIATION) * (double) baseSleepTime);
+		if (isOutlier) {
+			sleepTime -= (long) ((HALF + nextDouble() * SLEEP_DEVIATION) * sleepTime);
+			System.out.println("Generated hiccup outlier with a sleeptime of " + sleepTime);
+		}
+		return sleepTime;
 	}
 
 	private long calcHiccupDuration() {
@@ -71,7 +80,11 @@ public final class TC_05_BlurredHiccup implements Problem {
 	}
 
 	private synchronized void beginHiccup() {
-		this.isHiccupPhase = true;
+		if (isHiccupPhase) {
+			return;
+		}
+		isHiccupPhase = true;
+		canHiccup = false;
 		final long hiccupDuration = calcHiccupDuration();
 		System.out.println("Started a hiccup phase for " + hiccupDuration + " ms");
 
@@ -84,7 +97,14 @@ public final class TC_05_BlurredHiccup implements Problem {
 				} catch (InterruptedException e) {
 					throw new RuntimeException();
 				}
-				TC_05_BlurredHiccup.getInstance().endHiccup();
+				endHiccup();
+				try {
+					Thread.sleep(MIN_TO_NEXT_HICCUP);
+				} catch (InterruptedException e) {
+					throw new RuntimeException();
+				}
+				canHiccup = true;
+				System.out.println("Ready for next hiccup again.");
 			}
 		});
 	}

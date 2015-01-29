@@ -12,7 +12,7 @@ public class VU_05_BlurredHiccup extends AbstractVUser {
 
 	@Override
 	public void executeIteration() {
-		doExecuteIteration(TC_05_BlurredHiccup.NAME);
+		doExecuteIteration(TC_05_BlurredHiccup.class.getSimpleName());
 	}
 
 }
