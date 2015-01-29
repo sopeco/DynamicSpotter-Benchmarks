@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.spotter.benchmark.app;
+package org.spotter.benchmark.dummyjdbc.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,6 @@ import java.util.List;
 import org.lpe.common.util.web.WebServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spotter.benchmark.dummyjdbc.DummyJdbcDriver;
 
 /**
  * A benchmark App for DynamicSpotter.
@@ -29,21 +28,19 @@ import org.spotter.benchmark.dummyjdbc.DummyJdbcDriver;
  * @author Denis Knoepfle
  * 
  */
-public final class BenchmarkAppLauncher {
+public final class DummyDBLauncher {
 
-	public static final int DEFAULT_PORT = 8081;
-	public static final String DUMMY_DB_HOST = "localhost";
-	public static final int DUMMY_DB_PORT = 8082;
+	public static final int DEFAULT_PORT = 8082;
 
 	private static final int MIN_NUM_WORKER_THREADS = 10;
 	private static final int MAX_NUM_WORKER_THREADS = 500;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BenchmarkAppLauncher.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(DummyDBLauncher.class);
 
 	/**
 	 * Private constructor due to singleton class.
 	 */
-	private BenchmarkAppLauncher() {
+	private DummyDBLauncher() {
 
 	}
 
@@ -63,11 +60,8 @@ public final class BenchmarkAppLauncher {
 				printHelpAndExit();
 			} else {
 				if (args[0].equalsIgnoreCase("start")) {
-					// init dummy JDBC driver
-					DummyJdbcDriver tmp = new DummyJdbcDriver();
-					System.out.println("JDBC Driver: " + tmp.getClass().getSimpleName());
 					List<String> servicePackages = new ArrayList<>();
-					servicePackages.add("org.spotter.benchmark.app");
+					servicePackages.add("org.spotter.benchmark.dummyjdbc.server.rest");
 					WebServer.getInstance().start(DEFAULT_PORT, "", servicePackages, MIN_NUM_WORKER_THREADS,
 							MAX_NUM_WORKER_THREADS);
 
