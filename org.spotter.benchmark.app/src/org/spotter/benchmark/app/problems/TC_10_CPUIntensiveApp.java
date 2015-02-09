@@ -1,7 +1,10 @@
 package org.spotter.benchmark.app.problems;
 
+/**
+ * The a CPU intensive problem.
+ */
 public class TC_10_CPUIntensiveApp extends Problem {
-	
+
 	private static final int FIB_NUMBER = 35;
 	private static TC_10_CPUIntensiveApp instance;
 
@@ -20,16 +23,16 @@ public class TC_10_CPUIntensiveApp extends Problem {
 
 	@Override
 	public void test() {
-		syncFibonacci();
+		calcFibonacci();
 	}
 
 	/**
 	 * Calculates a fibonacci number.
 	 */
-	public void syncFibonacci() {
+	private void calcFibonacci() {
 		long start = System.currentTimeMillis();
 		fibonacci(FIB_NUMBER);
-		System.out.println((System.currentTimeMillis() - start) + " ms");
+		System.out.println((System.currentTimeMillis() - start) + " ms to calculate fib(" + FIB_NUMBER + ")");
 	}
 
 	private int fibonacci(int n) {
