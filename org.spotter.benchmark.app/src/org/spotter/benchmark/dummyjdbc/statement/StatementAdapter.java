@@ -83,7 +83,7 @@ public class StatementAdapter implements Statement {
 
 	@Override
 	public boolean execute(String sql) throws SQLException {
-		return false;
+		return executeQuery(sql)!=null;
 	}
 
 	@Override
