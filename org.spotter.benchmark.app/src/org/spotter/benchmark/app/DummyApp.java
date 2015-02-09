@@ -33,6 +33,8 @@ import org.spotter.benchmark.app.problems.TC_04_RisingHiccup;
 import org.spotter.benchmark.app.problems.TC_05_BlurredHiccup;
 import org.spotter.benchmark.app.problems.TC_08_ConstantDelay;
 import org.spotter.benchmark.app.problems.TC_09_BlurredDelay;
+import org.spotter.benchmark.app.problems.TC_12_ManyEqualDBCalls;
+import org.spotter.benchmark.app.problems.TC_13_ManySimilarDBCalls;
 import org.spotter.benchmark.app.problems.TC_21_ClearSync;
 import org.spotter.benchmark.app.problems.Problem;
 import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
@@ -70,6 +72,8 @@ public class DummyApp {
 		problems.put(TC_09_BlurredDelay.class.getSimpleName(), TC_09_BlurredDelay.getInstance());
 		problems.put(TC_10_CPUIntensiveApp.class.getSimpleName(), TC_10_CPUIntensiveApp.getInstance());
 		problems.put(TC_11_ManyDiffDBCalls.class.getSimpleName(), TC_11_ManyDiffDBCalls.getInstance());
+		problems.put(TC_12_ManyEqualDBCalls.class.getSimpleName(), TC_12_ManyEqualDBCalls.getInstance());
+		problems.put(TC_13_ManySimilarDBCalls.class.getSimpleName(), TC_13_ManySimilarDBCalls.getInstance());
 		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
 	}
 

@@ -9,6 +9,9 @@ import java.util.UUID;
 
 import org.spotter.benchmark.dummyjdbc.server.rest.DummyDB;
 
+/**
+ * A problem with many different database calls.
+ */
 public class TC_11_ManyDiffDBCalls extends Problem {
 	public static Random rand = new Random(System.nanoTime());
 	public static Connection connection;
@@ -16,7 +19,6 @@ public class TC_11_ManyDiffDBCalls extends Problem {
 		try {
 			connection = DriverManager.getConnection("any");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -38,7 +40,6 @@ public class TC_11_ManyDiffDBCalls extends Problem {
 		try {
 			executeQuery();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -47,7 +48,7 @@ public class TC_11_ManyDiffDBCalls extends Problem {
 	private void executeQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
 		String subQuery = getSubQuery(0, 5);
-		stmt.execute("SLECT a FROM " + subQuery + " WHERE " + DummyDB.FIB_KEY + "35 AND a=1");
+		stmt.execute("SELECT a FROM " + subQuery + " WHERE " + DummyDB.FIB_KEY + "35 AND a=1");
 	}
 
 	private String getSubQuery(int count, int maxDepth) {
@@ -70,7 +71,7 @@ public class TC_11_ManyDiffDBCalls extends Problem {
 		}
 
 		if (count < maxDepth) {
-			return "SLECT a FROM (" + randStr + ")," + getSubQuery(count++, maxDepth) + " WHERE " + s + "=" + i;
+			return "SELECT a FROM (" + randStr + ")," + getSubQuery(count++, maxDepth) + " WHERE " + s + "=" + i;
 		} else {
 			return randStr;
 		}
