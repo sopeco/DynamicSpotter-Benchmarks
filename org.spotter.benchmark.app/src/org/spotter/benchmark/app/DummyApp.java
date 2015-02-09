@@ -26,20 +26,22 @@ import javax.ws.rs.core.MediaType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spotter.benchmark.app.problems.TC_03_ClearHiccup;
-import org.spotter.benchmark.app.problems.TC_02_NoProblemWithOutliers;
+import org.spotter.benchmark.app.problems.Problem;
 import org.spotter.benchmark.app.problems.TC_01_NoProblemWithoutOutliers;
+import org.spotter.benchmark.app.problems.TC_02_NoProblemWithOutliers;
+import org.spotter.benchmark.app.problems.TC_03_ClearHiccup;
 import org.spotter.benchmark.app.problems.TC_04_RisingHiccup;
 import org.spotter.benchmark.app.problems.TC_05_BlurredHiccup;
+import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
 import org.spotter.benchmark.app.problems.TC_08_ConstantDelay;
 import org.spotter.benchmark.app.problems.TC_09_BlurredDelay;
+import org.spotter.benchmark.app.problems.TC_10_CPUIntensiveApp;
+import org.spotter.benchmark.app.problems.TC_11_ManyDiffDBCalls;
 import org.spotter.benchmark.app.problems.TC_12_ManyEqualDBCalls;
 import org.spotter.benchmark.app.problems.TC_13_ManySimilarDBCalls;
+import org.spotter.benchmark.app.problems.TC_14_CPUIntenDBCalls;
+import org.spotter.benchmark.app.problems.TC_15_LockingDBCalls;
 import org.spotter.benchmark.app.problems.TC_21_ClearSync;
-import org.spotter.benchmark.app.problems.Problem;
-import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
-import org.spotter.benchmark.app.problems.TC_11_ManyDiffDBCalls;
-import org.spotter.benchmark.app.problems.TC_10_CPUIntensiveApp;
 
 /**
  * Dummy Application.
@@ -74,6 +76,8 @@ public class DummyApp {
 		problems.put(TC_11_ManyDiffDBCalls.class.getSimpleName(), TC_11_ManyDiffDBCalls.getInstance());
 		problems.put(TC_12_ManyEqualDBCalls.class.getSimpleName(), TC_12_ManyEqualDBCalls.getInstance());
 		problems.put(TC_13_ManySimilarDBCalls.class.getSimpleName(), TC_13_ManySimilarDBCalls.getInstance());
+		problems.put(TC_14_CPUIntenDBCalls.class.getSimpleName(), TC_14_CPUIntenDBCalls.getInstance());
+		problems.put(TC_15_LockingDBCalls.class.getSimpleName(), TC_15_LockingDBCalls.getInstance());
 		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
 	}
 
