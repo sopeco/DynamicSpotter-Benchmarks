@@ -31,6 +31,10 @@ import org.spotter.benchmark.app.problems.TC_02_NoProblemWithOutliers;
 import org.spotter.benchmark.app.problems.TC_01_NoProblemWithoutOutliers;
 import org.spotter.benchmark.app.problems.TC_04_RisingHiccup;
 import org.spotter.benchmark.app.problems.TC_05_BlurredHiccup;
+import org.spotter.benchmark.app.problems.TC_08_ConstantDelay;
+import org.spotter.benchmark.app.problems.TC_09_BlurredDelay;
+import org.spotter.benchmark.app.problems.TC_12_ManyEqualDBCalls;
+import org.spotter.benchmark.app.problems.TC_13_ManySimilarDBCalls;
 import org.spotter.benchmark.app.problems.TC_21_ClearSync;
 import org.spotter.benchmark.app.problems.Problem;
 import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
@@ -64,8 +68,12 @@ public class DummyApp {
 		problems.put(TC_04_RisingHiccup.class.getSimpleName(), TC_04_RisingHiccup.getInstance());
 		problems.put(TC_05_BlurredHiccup.class.getSimpleName(), TC_05_BlurredHiccup.getInstance());
 		problems.put(TC_07_BlurredRamp.class.getSimpleName(), TC_07_BlurredRamp.getInstance());
+		problems.put(TC_08_ConstantDelay.class.getSimpleName(), TC_08_ConstantDelay.getInstance());
+		problems.put(TC_09_BlurredDelay.class.getSimpleName(), TC_09_BlurredDelay.getInstance());
 		problems.put(TC_10_CPUIntensiveApp.class.getSimpleName(), TC_10_CPUIntensiveApp.getInstance());
 		problems.put(TC_11_ManyDiffDBCalls.class.getSimpleName(), TC_11_ManyDiffDBCalls.getInstance());
+		problems.put(TC_12_ManyEqualDBCalls.class.getSimpleName(), TC_12_ManyEqualDBCalls.getInstance());
+		problems.put(TC_13_ManySimilarDBCalls.class.getSimpleName(), TC_13_ManySimilarDBCalls.getInstance());
 		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
 	}
 
