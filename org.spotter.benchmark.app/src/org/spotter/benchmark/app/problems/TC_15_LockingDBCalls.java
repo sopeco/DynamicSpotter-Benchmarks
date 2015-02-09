@@ -42,7 +42,7 @@ public class TC_15_LockingDBCalls extends Problem {
 
 	private void executeQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
-		int n = rand.nextInt(3000) + 1000;
+		int n = rand.nextInt(2000) + 2000;
 		stmt.execute("SELECT a FROM MyTable WHERE " + DummyDB.SLEEP_KEY + n + " AND " + DummyDB.SYNC_KEY + " ");
 	}
 

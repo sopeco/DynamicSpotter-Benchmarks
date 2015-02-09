@@ -42,7 +42,7 @@ public class TC_14_CPUIntenDBCalls extends Problem {
 
 	private void executeQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
-		int n = rand.nextInt(30) + 10;
+		int n = rand.nextInt(10) + 35;
 		stmt.execute("SELECT a FROM MyTable WHERE " + DummyDB.FIB_KEY + n + " AND a=1");
 	}
 
