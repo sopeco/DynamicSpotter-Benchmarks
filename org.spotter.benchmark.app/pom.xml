@@ -76,6 +76,7 @@
 				<version>2.1</version>
 				<executions>
 					<execution>
+					<id>AppLauncher</id>
 						<phase>package</phase>
 						<goals>
 							<goal>shade</goal>
@@ -87,6 +88,41 @@
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<manifestEntries>
 										<Main-Class>org.spotter.benchmark.app.BenchmarkAppLauncher</Main-Class>
+										<Build-Number>1</Build-Number>
+									</manifestEntries>
+								</transformer>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer">
+								</transformer>
+							</transformers>
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+					
+					<execution>
+					<id>DummyDB</id>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration combine.self="override">
+							<outputFile>${basedir}/../benchmark-packaged/DummyDB.jar</outputFile>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<manifestEntries>
+										<Main-Class>org.spotter.benchmark.dummyjdbc.server.DummyDBLauncher</Main-Class>
 										<Build-Number>1</Build-Number>
 									</manifestEntries>
 								</transformer>
