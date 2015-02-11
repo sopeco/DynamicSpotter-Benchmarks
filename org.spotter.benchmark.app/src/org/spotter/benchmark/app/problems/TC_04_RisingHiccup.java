@@ -31,9 +31,9 @@ public final class TC_04_RisingHiccup extends Problem {
 	private static final long HICCUP_PEEK_SLEEP_TIME = 1800; // [ms]
 	private static final double SLEEP_DEVIATION = 0.25;
 
-	private static final long HICCUP_DURATION = 6000; // [ms]
-	private static final long MIN_TO_NEXT_HICCUP = 4000; // [ms]
-	private static final double HICCUP_DURATION_DEVIATION = 0.5;
+	private static final long HICCUP_DURATION = 5000; // [ms]
+	private static final long MIN_TO_NEXT_HICCUP = 8000; // [ms]
+	private static final double HICCUP_DURATION_DEVIATION = 2.0;
 	private static final double HICCUP_BEGIN_PROB = 0.002;
 
 	private static final Random RAND = new Random(System.nanoTime());
@@ -97,7 +97,7 @@ public final class TC_04_RisingHiccup extends Problem {
 
 	private long calcHiccupDuration() {
 		return HICCUP_DURATION
-				+ (long) (((2.0 * (nextDouble() - HALF)) * HICCUP_DURATION_DEVIATION) * (double) HICCUP_DURATION);
+				+ (long) ((nextDouble() * HICCUP_DURATION_DEVIATION) * (double) HICCUP_DURATION);
 	}
 
 	private long calcHiccupPeekSleepTime() {
@@ -130,7 +130,7 @@ public final class TC_04_RisingHiccup extends Problem {
 				endHiccup();
 
 				try {
-					Thread.sleep(MIN_TO_NEXT_HICCUP);
+					Thread.sleep(MIN_TO_NEXT_HICCUP + (long)(40000.0*RAND.nextDouble()));
 				} catch (InterruptedException e) {
 					throw new RuntimeException();
 				}

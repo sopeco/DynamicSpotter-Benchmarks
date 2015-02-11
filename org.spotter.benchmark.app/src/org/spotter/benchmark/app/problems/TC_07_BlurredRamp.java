@@ -11,11 +11,12 @@ import java.util.Random;
 public final class TC_07_BlurredRamp extends Problem {
 
 	
-	private static final long START_SLEEP = 80;
-	private static final double SLEEP_DEVIATION = 0.5;
-	private static final long SLEEP_TIME_INCREASE = 6;
+	private static final long START_SLEEP = 800;
+	private static final double SLEEP_DEVIATION = 0.25;
+	private static final long SLEEP_TIME_INCREASE = 4;
 	private static final long MIN_DEVIATION = 1;
-	private static final long MAX_DEVIATION = 5;
+	private static final long MAX_DEVIATION = 2;
+	private static final long MAX_ABSOLUTE_DEVIATION = 200;
 	private static final Random RAND = new Random(System.nanoTime());
 
 	private volatile long sleepTime;
@@ -38,9 +39,16 @@ public final class TC_07_BlurredRamp extends Problem {
 	@Override
 	public void test() {
 		try {
-			Thread.sleep(sleepTime + (long) (((2.0 * (nextDouble() - 0.5)) * SLEEP_DEVIATION) * (double)sleepTime));
+			long calSleepTime = sleepTime + (long) (((2.0 * (nextDouble() - 0.5)) * SLEEP_DEVIATION) * (double)sleepTime);
+			if(calSleepTime > sleepTime){
+				calSleepTime = Math.min(calSleepTime, sleepTime + MAX_ABSOLUTE_DEVIATION);
+			}else{
+				calSleepTime = Math.max(calSleepTime, sleepTime - MAX_ABSOLUTE_DEVIATION);
+			}
+		
+			Thread.sleep(calSleepTime);
 			System.out.println("Slept for " + sleepTime + " ms");
-			if (nextDouble() < 0.05) {
+			if (nextDouble() < 0.001) {
 				increaseSleepTime();
 			}
 

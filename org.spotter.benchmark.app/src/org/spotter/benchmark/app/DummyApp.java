@@ -32,6 +32,7 @@ import org.spotter.benchmark.app.problems.TC_02_NoProblemWithOutliers;
 import org.spotter.benchmark.app.problems.TC_03_ClearHiccup;
 import org.spotter.benchmark.app.problems.TC_04_RisingHiccup;
 import org.spotter.benchmark.app.problems.TC_05_BlurredHiccup;
+import org.spotter.benchmark.app.problems.TC_06_MonotoneRamp;
 import org.spotter.benchmark.app.problems.TC_07_BlurredRamp;
 import org.spotter.benchmark.app.problems.TC_08_ConstantDelay;
 import org.spotter.benchmark.app.problems.TC_09_BlurredDelay;
@@ -70,6 +71,7 @@ public class DummyApp {
 		problems.put(TC_03_ClearHiccup.class.getSimpleName(), TC_03_ClearHiccup.getInstance());
 		problems.put(TC_04_RisingHiccup.class.getSimpleName(), TC_04_RisingHiccup.getInstance());
 		problems.put(TC_05_BlurredHiccup.class.getSimpleName(), TC_05_BlurredHiccup.getInstance());
+		problems.put(TC_06_MonotoneRamp.class.getSimpleName(), TC_06_MonotoneRamp.getInstance());
 		problems.put(TC_07_BlurredRamp.class.getSimpleName(), TC_07_BlurredRamp.getInstance());
 		problems.put(TC_08_ConstantDelay.class.getSimpleName(), TC_08_ConstantDelay.getInstance());
 		problems.put(TC_09_BlurredDelay.class.getSimpleName(), TC_09_BlurredDelay.getInstance());

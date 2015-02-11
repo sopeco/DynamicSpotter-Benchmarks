@@ -13,12 +13,12 @@ import org.lpe.common.util.system.LpeSystemUtils;
 public final class TC_03_ClearHiccup extends Problem {
 
 	private static final long NORMAL_SLEEP_TIME = 80; // [ms]
-	private static final long HICCUP_PHASE_SLEEP_TIME = 1800; // [ms]
+	private static final long HICCUP_PHASE_SLEEP_TIME = 1400; // [ms]
 	private static final double SLEEP_DEVIATION = 0.4;
 
-	private static final long HICCUP_DURATION = 2500; // [ms]
-	private static final long MIN_TO_NEXT_HICCUP = 4000; // [ms]
-	private static final double HICCUP_DURATION_DEVIATION = 0.5;
+	private static final long HICCUP_DURATION = 5000; // [ms]
+	private static final long MIN_TO_NEXT_HICCUP = 10000; // [ms]
+	private static final double HICCUP_DURATION_DEVIATION = 0.9;
 	private static final double HICCUP_BEGIN_PROB = 0.002;
 
 	private static final Random RAND = new Random(System.nanoTime());
@@ -90,7 +90,7 @@ public final class TC_03_ClearHiccup extends Problem {
 				}
 				endHiccup();
 				try {
-					Thread.sleep(MIN_TO_NEXT_HICCUP);
+					Thread.sleep(MIN_TO_NEXT_HICCUP + (long)(60000.0*RAND.nextDouble()));
 				} catch (InterruptedException e) {
 					throw new RuntimeException();
 				}

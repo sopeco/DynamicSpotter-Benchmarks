@@ -11,7 +11,7 @@ import java.util.Random;
 public final class TC_08_ConstantDelay extends Problem {
 
 	private static final long SLEEP_TIME = 1200;
-	private static final double SLEEP_DEVIATION = 0.1;
+	private static final double SLEEP_DEVIATION = 0.5;
 	private static final Random RAND = new Random(System.nanoTime());
 
 	private static TC_08_ConstantDelay instance;

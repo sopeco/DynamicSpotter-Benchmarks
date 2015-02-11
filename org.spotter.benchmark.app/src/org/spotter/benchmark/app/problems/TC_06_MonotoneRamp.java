@@ -38,7 +38,7 @@ public final class TC_06_MonotoneRamp extends Problem {
 		try {
 			Thread.sleep(sleepTime);
 			System.out.println("Slept for " + sleepTime + " ms");
-			if (nextDouble() < 0.05) {
+			if (nextDouble() < 0.01) {
 				increaseSleepTime();
 			}
 

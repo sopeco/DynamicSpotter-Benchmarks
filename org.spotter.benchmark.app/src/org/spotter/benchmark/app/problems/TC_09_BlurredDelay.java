@@ -11,6 +11,7 @@ import java.util.Random;
 public final class TC_09_BlurredDelay extends Problem {
 
 	private static final long SLEEP_TIME = 1200;
+	private static final long LOW_SLEEP_TIME = 200;
 	private static final double SLEEP_DEVIATION = 0.5;
 	private static final Random RAND = new Random(System.nanoTime());
 
@@ -32,8 +33,15 @@ public final class TC_09_BlurredDelay extends Problem {
 	@Override
 	public void test() {
 		try {
-			long sleepTime = SLEEP_TIME
-					+ (long) (((2.0 * (nextDouble() - 0.5)) * SLEEP_DEVIATION) * (double) SLEEP_TIME);
+			long sleepTime = 0;
+			if(RAND.nextDouble()<0.6){
+				sleepTime = LOW_SLEEP_TIME
+						+ (long) (((2.0 * (nextDouble() - 0.5)) * SLEEP_DEVIATION) * (double) LOW_SLEEP_TIME);
+			}else{
+				sleepTime = SLEEP_TIME
+						+ (long) (((2.0 * (nextDouble() - 0.5)) * SLEEP_DEVIATION) * (double) SLEEP_TIME);
+			}
+			
 			Thread.sleep(sleepTime);
 			System.out.println("Slept for " + sleepTime + " ms");
 		} catch (InterruptedException e) {
