@@ -42,6 +42,7 @@ import org.spotter.benchmark.app.problems.TC_13_ManySimilarDBCalls;
 import org.spotter.benchmark.app.problems.TC_14_CPUIntenDBCalls;
 import org.spotter.benchmark.app.problems.TC_15_LockingDBCalls;
 import org.spotter.benchmark.app.problems.TC_21_ClearSync;
+import org.spotter.benchmark.app.problems.TC_22_BlurredSync;
 
 /**
  * Dummy Application.
@@ -79,6 +80,7 @@ public class DummyApp {
 		problems.put(TC_14_CPUIntenDBCalls.class.getSimpleName(), TC_14_CPUIntenDBCalls.getInstance());
 		problems.put(TC_15_LockingDBCalls.class.getSimpleName(), TC_15_LockingDBCalls.getInstance());
 		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
+		problems.put(TC_22_BlurredSync.class.getSimpleName(), TC_22_BlurredSync.getInstance());
 	}
 
 	/**
