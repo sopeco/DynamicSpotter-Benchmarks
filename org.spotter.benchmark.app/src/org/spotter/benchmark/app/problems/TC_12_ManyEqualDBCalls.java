@@ -13,7 +13,7 @@ import org.spotter.benchmark.dummyjdbc.server.rest.DummyDB;
  */
 public class TC_12_ManyEqualDBCalls extends Problem {
 	private static final int NUM_QUERIES = 50;
-	private static final int NUM_QUERIES_DEVIATION = 100;
+	private static final int NUM_QUERIES_DEVIATION = 20;
 	public static Random rand = new Random(System.nanoTime());
 	public static Connection connection;
 	static {
@@ -52,7 +52,7 @@ public class TC_12_ManyEqualDBCalls extends Problem {
 	private void executeQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.execute("SELECT a FROM (SELECT max(a) FROM A WHERE b = 2 ORDER BY x) WHERE " + DummyDB.SLEEP_KEY
-				+ "15 AND a=1");
+				+ "1 AND a=1 AND " + DummyDB.SYNC_KEY + "=2");
 	}
 
 }

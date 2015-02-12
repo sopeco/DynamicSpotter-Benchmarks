@@ -1,5 +1,7 @@
 package org.spotter.benchmark.app.problems;
 
+import java.util.Random;
+
 /**
  * The OLB problem which is using a synchronized call to a fibonacci
  * calculation.
@@ -11,6 +13,8 @@ public final class TC_21_ClearSync extends Problem {
 
 	
 	private static final int FIB_NUMBER = 35;
+	private static final int FIB_NUMBER_DEV = 7;
+	private static final Random RAND = new Random(System.nanoTime());
 	private static TC_21_ClearSync instance;
 
 	/**
@@ -36,7 +40,7 @@ public final class TC_21_ClearSync extends Problem {
 	 */
 	public synchronized void syncFibonacci() {
 		long start = System.currentTimeMillis();
-		fibonacci(FIB_NUMBER);
+		fibonacci(FIB_NUMBER + RAND.nextInt(FIB_NUMBER_DEV));
 		System.out.println((System.currentTimeMillis() - start) + " ms");
 	}
 

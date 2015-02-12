@@ -11,8 +11,9 @@ import java.util.Random;
  */
 public final class TC_22_BlurredSync extends Problem {
 
-	private static final int FIB_NUMBER = 35;
-	private static final double OUTLIER_PERCENTAGE = 0.1;
+	private static final int FIB_NUMBER = 30;
+	private static final int FIB_NUMBER_DEV = 7;
+	private static final double OUTLIER_PERCENTAGE = 0.2;
 	private static final Random RAND = new Random(System.nanoTime());
 	private static TC_22_BlurredSync instance;
 
@@ -40,9 +41,9 @@ public final class TC_22_BlurredSync extends Problem {
 	public void blurredFibonacci() {
 		long start = System.currentTimeMillis();
 		if (nextDouble() < OUTLIER_PERCENTAGE) {
-			fibonacci(FIB_NUMBER);
+			fibonacci(FIB_NUMBER + RAND.nextInt(FIB_NUMBER_DEV));
 		} else {
-			syncFibonacci(FIB_NUMBER);
+			syncFibonacci(FIB_NUMBER + RAND.nextInt(FIB_NUMBER_DEV));
 		}
 		System.out.println((System.currentTimeMillis() - start) + " ms");
 	}
@@ -59,7 +60,7 @@ public final class TC_22_BlurredSync extends Problem {
 		}
 	}
 
-	private synchronized double nextDouble() {
+	private double nextDouble() {
 		return RAND.nextDouble();
 	}
 

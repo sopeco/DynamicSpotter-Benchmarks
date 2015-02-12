@@ -10,6 +10,7 @@ import org.aim.artifacts.records.DBStatisticsRecrod;
 
 @Path("dummyDB")
 public class DummyDB {
+	public static final Object lock = new Object();
 	public static final String SYNC_KEY = "sync";
 	public static final String SLEEP_KEY = "sleep=";
 	public static final String FIB_KEY = "fibonacci=";
@@ -85,7 +86,7 @@ public class DummyDB {
 	private long syncSleep(long duration) {
 		long start = System.currentTimeMillis();
 		long dur = 0L;
-		synchronized (this) {
+		synchronized (lock) {
 			dur = sleep(duration);
 		}
 		return (System.currentTimeMillis() - start) - dur;
@@ -108,7 +109,7 @@ public class DummyDB {
 	private long syncFibonacci(int n) {
 		long start = System.currentTimeMillis();
 		long dur = 0L;
-		synchronized (this) {
+		synchronized (lock) {
 			dur = fibonacci(n);
 		}
 		return (System.currentTimeMillis() - start) - dur;
