@@ -32,7 +32,7 @@ public final class DummyDBLauncher {
 
 	public static final int DEFAULT_PORT = 8082;
 
-	private static final int MIN_NUM_WORKER_THREADS = 10;
+	private static final int MIN_NUM_WORKER_THREADS = 100;
 	private static final int MAX_NUM_WORKER_THREADS = 500;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DummyDBLauncher.class);

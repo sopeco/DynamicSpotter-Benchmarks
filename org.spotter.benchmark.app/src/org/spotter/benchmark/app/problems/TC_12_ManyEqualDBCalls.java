@@ -51,7 +51,7 @@ public class TC_12_ManyEqualDBCalls extends Problem {
 
 	private void executeQuery() throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.execute("SELECT a FROM (SELECT max(a) FROM A WHERE b = 2 ORDER BY x) WHERE " + DummyDB.SLEEP_KEY
+		stmt.execute("SELECT a FROM myTable WHERE " + DummyDB.SLEEP_KEY
 				+ "1 AND a=1 AND " + DummyDB.SYNC_KEY + "=2");
 	}
 

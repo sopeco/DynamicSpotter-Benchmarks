@@ -48,7 +48,8 @@ public abstract class AbstractVUser implements ISimpleVUser {
 		client.setConnectTimeout(TIMEOUT);
 		client.setReadTimeout(TIMEOUT);
 		int port = BenchmarkAppLauncher.DEFAULT_PORT;
-		this.webResource = client.resource("http://localhost:" + port + "/");
+		String host = BenchmarkAppLauncher.HOST;
+		this.webResource = client.resource("http://" + host + ":" + port + "/");
 	}
 
 	/**

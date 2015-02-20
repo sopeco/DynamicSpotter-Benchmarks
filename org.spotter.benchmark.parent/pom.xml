@@ -20,10 +20,21 @@
 			<name>LPE Repository</name>
 			<url>http://i43vm-saas.ipd.uka.de:8081/artifactory/lpe-repos</url>
 		</repository>
+
+
 	</repositories>
 
 	<modules>
 		<module>../org.spotter.benchmark.app</module>
 	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-client</artifactId>
+			<version>5.8.0</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

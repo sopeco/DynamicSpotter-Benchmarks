@@ -30,10 +30,16 @@ import org.spotter.benchmark.dummyjdbc.DummyJdbcDriver;
  * 
  */
 public final class BenchmarkAppLauncher {
-
+	public static final String HOST = "deqkal288.qkal.sap.corp";
+//	public static final String HOST = "localhost";
 	public static final int DEFAULT_PORT = 8081;
+	
+//	public static final String DUMMY_DB_HOST = "192.168.0.107";
 	public static final String DUMMY_DB_HOST = "localhost";
 	public static final int DUMMY_DB_PORT = 8082;
+	
+	public static final String JMS_HOST = "deqkal278vm2.qkal.sap.corp";
+	
 
 	private static final int MIN_NUM_WORKER_THREADS = 10;
 	private static final int MAX_NUM_WORKER_THREADS = 500;

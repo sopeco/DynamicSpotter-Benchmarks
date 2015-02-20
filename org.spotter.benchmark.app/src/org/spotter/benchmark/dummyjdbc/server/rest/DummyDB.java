@@ -1,22 +1,28 @@
 package org.spotter.benchmark.dummyjdbc.server.rest;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.aim.artifacts.records.DBStatisticsRecrod;
 
-@Path("dummyDB")
 public class DummyDB {
-	public static final Object lock = new Object();
 	public static final String SYNC_KEY = "sync";
 	public static final String SLEEP_KEY = "sleep=";
 	public static final String FIB_KEY = "fibonacci=";
+
+	private static DummyDB instance;
+
+	protected static DummyDB getInstance() {
+		if (instance == null) {
+			instance = new DummyDB();
+		}
+		return instance;
+	}
+
 	private volatile long numQueries = 0;
 	private volatile long numLockWaits = 0;
 	private volatile long lockTime = 0;
+
+	private DummyDB() {
+
+	}
 
 	/**
 	 * Tests the given problem.
@@ -25,10 +31,8 @@ public class DummyDB {
 	 *            the name of the problem to test
 	 * @return hello string
 	 */
-	@GET
-	@Path("call" + "/{command}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String call(@PathParam("command") String command) {
+
+	public String call(String command) {
 		numQueries++;
 		if (command.contains(SYNC_KEY)) {
 			if (command.contains(SLEEP_KEY)) {
@@ -37,7 +41,7 @@ public class DummyDB {
 				tmp = tmp.substring(0, tmp.indexOf(' '));
 				long sleepDuration = Long.parseLong(tmp);
 				long wait = syncSleep(sleepDuration);
-				if (wait > 5) {
+				if (wait > 0) {
 					numLockWaits++;
 					lockTime += wait;
 				}
@@ -47,7 +51,7 @@ public class DummyDB {
 				tmp = tmp.substring(0, tmp.indexOf(' '));
 				int fibNumber = Integer.parseInt(tmp);
 				long wait = syncFibonacci(fibNumber);
-				if (wait > 5) {
+				if (wait > 0) {
 					numLockWaits++;
 					lockTime += wait;
 				}
@@ -70,23 +74,21 @@ public class DummyDB {
 		return "Hallo from Dummy DB";
 	}
 
-	@GET
-	@Path("getStatistics")
-	@Produces(MediaType.APPLICATION_JSON)
 	public String getStatistics() {
 		DBStatisticsRecrod record = new DBStatisticsRecrod();
 		record.setTimeStamp(System.currentTimeMillis());
 		record.setNumQueueries(numQueries);
-		record.setProcessId("dummyDB");
 		record.setNumLockWaits(numLockWaits);
+		record.setProcessId("dummyDB");
 		record.setLockTime(lockTime);
 		return record.toString();
 	}
 
 	private long syncSleep(long duration) {
 		long start = System.currentTimeMillis();
+		System.out.println("syncSleep " + duration);
 		long dur = 0L;
-		synchronized (lock) {
+		synchronized (this) {
 			dur = sleep(duration);
 		}
 		return (System.currentTimeMillis() - start) - dur;
@@ -94,6 +96,7 @@ public class DummyDB {
 
 	private long sleep(long duration) {
 		long start = System.currentTimeMillis();
+		System.out.println("sleep " + duration);
 		try {
 			Thread.sleep(duration);
 		} catch (InterruptedException e) {
@@ -108,8 +111,9 @@ public class DummyDB {
 	 */
 	private long syncFibonacci(int n) {
 		long start = System.currentTimeMillis();
+		System.out.println("syncFib " + n);
 		long dur = 0L;
-		synchronized (lock) {
+		synchronized (this) {
 			dur = fibonacci(n);
 		}
 		return (System.currentTimeMillis() - start) - dur;
@@ -120,6 +124,7 @@ public class DummyDB {
 	 */
 	private long fibonacci(int n) {
 		long start = System.currentTimeMillis();
+		System.out.println("fib " + n);
 		fib(n);
 		return System.currentTimeMillis() - start;
 	}

@@ -42,8 +42,14 @@ import org.spotter.benchmark.app.problems.TC_12_ManyEqualDBCalls;
 import org.spotter.benchmark.app.problems.TC_13_ManySimilarDBCalls;
 import org.spotter.benchmark.app.problems.TC_14_CPUIntenDBCalls;
 import org.spotter.benchmark.app.problems.TC_15_LockingDBCalls;
+import org.spotter.benchmark.app.problems.TC_16_JMSFileTransfer;
+import org.spotter.benchmark.app.problems.TC_17_ClearBlob;
+import org.spotter.benchmark.app.problems.TC_18_BlurredBlob;
+import org.spotter.benchmark.app.problems.TC_19_DirectMessageLoop;
+import org.spotter.benchmark.app.problems.TC_20_CascadingMessageLoop;
 import org.spotter.benchmark.app.problems.TC_21_ClearSync;
 import org.spotter.benchmark.app.problems.TC_22_BlurredSync;
+import org.spotter.benchmark.app.problems.TC_23_NoSync;
 
 /**
  * Dummy Application.
@@ -56,16 +62,22 @@ public class DummyApp {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DummyApp.class);
 
-	private final Map<String, Problem> problems = new HashMap<>();
+	private static final Map<String, Problem> problems = new HashMap<>();
+
+	private static Map<String, Problem> getProblems() {
+		if (problems.isEmpty()) {
+			populateProblems();
+		}
+		return problems;
+	}
 
 	/**
 	 * Constructor.
 	 */
 	public DummyApp() {
-		populateProblems();
 	}
 
-	private void populateProblems() {
+	private static void populateProblems() {
 		problems.put(TC_01_NoProblemWithoutOutliers.class.getSimpleName(), TC_01_NoProblemWithoutOutliers.getInstance());
 		problems.put(TC_02_NoProblemWithOutliers.class.getSimpleName(), TC_02_NoProblemWithOutliers.getInstance());
 		problems.put(TC_03_ClearHiccup.class.getSimpleName(), TC_03_ClearHiccup.getInstance());
@@ -81,8 +93,14 @@ public class DummyApp {
 		problems.put(TC_13_ManySimilarDBCalls.class.getSimpleName(), TC_13_ManySimilarDBCalls.getInstance());
 		problems.put(TC_14_CPUIntenDBCalls.class.getSimpleName(), TC_14_CPUIntenDBCalls.getInstance());
 		problems.put(TC_15_LockingDBCalls.class.getSimpleName(), TC_15_LockingDBCalls.getInstance());
+		problems.put(TC_16_JMSFileTransfer.class.getSimpleName(), TC_16_JMSFileTransfer.getInstance());
+		problems.put(TC_17_ClearBlob.class.getSimpleName(), TC_17_ClearBlob.getInstance());
+		problems.put(TC_18_BlurredBlob.class.getSimpleName(), TC_18_BlurredBlob.getInstance());
+		problems.put(TC_19_DirectMessageLoop.class.getSimpleName(), TC_19_DirectMessageLoop.getInstance());
+		problems.put(TC_20_CascadingMessageLoop.class.getSimpleName(), TC_20_CascadingMessageLoop.getInstance());
 		problems.put(TC_21_ClearSync.class.getSimpleName(), TC_21_ClearSync.getInstance());
 		problems.put(TC_22_BlurredSync.class.getSimpleName(), TC_22_BlurredSync.getInstance());
+		problems.put(TC_23_NoSync.class.getSimpleName(), TC_23_NoSync.getInstance());
 	}
 
 	/**
@@ -97,8 +115,8 @@ public class DummyApp {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String testProblem(@PathParam("problemName") String problemName) {
 		String response;
-		if (problems.containsKey(problemName)) {
-			problems.get(problemName).test();
+		if (getProblems().containsKey(problemName)) {
+			getProblems().get(problemName).test();
 			response = "Hello from " + problemName + " Test Method!";
 		} else {
 			response = "Problem does not exist!";
